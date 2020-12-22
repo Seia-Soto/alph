@@ -75,5 +75,5 @@ const languageIndex = await alph.getIndexOf(
 - Possible values of:
   - `opts.key`: `language`, `artist`, `tag`
   - `opts.value`: `all ('language' key-only)`, `female:...`, `male:...`, ...
-  - `opts.page`: number, skip `page * next` items, **starting from 1**
-  - `opts.next`: number, items per page
+  - `opts.skip`: number, skip `skip * limit` items, **starting from 1**
+  - `opts.limit`: number, items per page, **required to set max item count**

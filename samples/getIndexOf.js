@@ -8,7 +8,8 @@ module.exports = async () => {
 
   const languageIndex = await getIndexOf({
     key: 'language',
-    value: 'korean'
+    value: 'korean',
+    limit: 25
   })
 
   debug(languageIndex)
@@ -17,7 +18,8 @@ module.exports = async () => {
 
   const artistIndex = await getIndexOf({
     key: 'artist',
-    value: 'hiten'
+    value: 'hiten',
+    limit: 25
   })
 
   debug(artistIndex)
