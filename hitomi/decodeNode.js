@@ -1,3 +1,5 @@
+const getUint64 = require('../utils/getUint64')
+
 module.exports = buffer => {
   const set = new DataView(buffer)
   let position = 0
@@ -30,7 +32,7 @@ module.exports = buffer => {
   position += 4
 
   for (let i = 0; i < dataCount; i++) {
-    const offset = set.getUint64(position, false /* big endian */)
+    const offset = getUint64(set, position, false /* big endian */)
 
     position += 8
 
@@ -49,7 +51,7 @@ module.exports = buffer => {
   const subnodeCount = 16 + 1
 
   for (let i = 0; i < subnodeCount; i++) {
-    const address = set.getUint64(position, false /* big-endian */)
+    const address = getUint64(set, position, false /* big-endian */)
 
     position += 8
 
