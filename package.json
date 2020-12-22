@@ -5,7 +5,7 @@
   "author": "Seia-Soto <seia@outlook.kr>",
   "license": "MIT",
   "scripts": {
-    "test": "cross-env DEBUG=* node scripts/test"
+    "test": "cross-env DEBUG=* node samples/_script"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
@@ -16,8 +16,8 @@
     "eslint-plugin-standard": "^4.0.1"
   },
   "dependencies": {
+    "cross-env": "^7.0.3",
     "debug": "^4.3.1",
-    "node-fetch": "^2.6.1",
-    "xpipe": "^1.0.5"
+    "node-fetch": "^2.6.1"
   }
 }

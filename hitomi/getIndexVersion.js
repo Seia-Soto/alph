@@ -7,7 +7,8 @@ module.exports = async (type, fetchAgent) => {
   const res = await fetch(`https://ltn.hitomi.la/${type}/version?_=${version}`, {
     headers: {
       'User-Agent': getUserAgent(),
-      pragma: 'no-cache'
+      pragma: 'no-cache',
+      dnt: 1
     },
     agent: fetchAgent
   })
