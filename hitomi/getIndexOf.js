@@ -1,37 +1,35 @@
 const fetch = require('node-fetch')
 const { createLogger, getUserAgent } = require('../utils')
+const buildURL = require('./buildURL')
+const decodeIndex = require('./decodeIndex')
+const decodeNozomi = require('./decodeNozomi')
 
 const debug = createLogger('hitomi/getIndexOf')
 
+const decoders = {
+  index: decodeIndex,
+  nozomi: decodeNozomi
+}
+
 module.exports = async (opts = {}, fetchAgent) => {
   const {
+    url,
     key,
     value,
     skip = 1,
     limit,
-    isCompressed = true
+    decoder = 'nozomi'
   } = opts
 
-  if (!opts.key || !opts.value) return []
+  if (!opts.key || !opts.value) return [] // NOTE: remove `!opts.key` when plain-text search implemented;
 
   opts.key = opts.key.toLowerCase()
   opts.value = opts.value.toLowerCase()
 
-  let url = 'https://ltn.hitomi.la'
-
-  if (1 || isCompressed) { // NOTE: should be always true;
-    debug('requesting assets as compressed')
-
-    url += '/n'
+  if (!opts.url) {
+    opts.url = await buildURL({ key, value })
+    opts.decoder = opts.url.split('.').slice(-1)[0]
   }
-
-  if (key === 'language') {
-    url += `/index-${value}`
-  } else {
-    url += `/${key}/${value}-all`
-  }
-
-  url += '.nozomi' // NOTE: attach `nozomi` extension;
 
   const headers = {
     'User-Agent': getUserAgent(),
@@ -61,17 +59,5 @@ module.exports = async (opts = {}, fetchAgent) => {
   })
   const buffer = await res.arrayBuffer()
 
-  debug('resolving response:', buffer)
-
-  const items = []
-  const set = new DataView(buffer)
-  const count = set.byteLength / 4
-
-  debug('got set of items:', count)
-
-  for (let i = 0; i < count; i++) {
-    items.push(set.getInt32(i * 4, false /* big endian */))
-  }
-
-  return items
+  return decoders[decoder](buffer)
 }

@@ -51,7 +51,7 @@ const result = await alph.getIndexVersion(type, agent)
 */
 ```
 
-- Possible values of `type`: `galleriesindex`, `tagindex`, ...
+- Possible values of `type`: `galleriesindex`, `tagindex`, `languagesindex`, `nozomiurlindex`
 
 ### getIndexOf
 
@@ -77,3 +77,7 @@ const languageIndex = await alph.getIndexOf(
   - `opts.value`: `all ('language' key-only)`, `female:...`, `male:...`, ...
   - `opts.skip`: number, skip `skip * limit` items, **starting from 1**
   - `opts.limit`: number, items per page, **required to set max item count**
+
+- Notes:
+  - Implementation of `B_Search`, also-known-as plain text search is not planned due to high resource use.
+    So, `opts.key` value is now **required** value, not an optional.

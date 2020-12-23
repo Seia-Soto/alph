@@ -1,2 +1,6 @@
+module.exports.buildURL = require('./buildURL')
+module.exports.decodeIndex = require('./decodeIndex')
+module.exports.decodeNozomi = require('./decodeNozomi')
+module.exports.getHashOf = require('./getHashOf')
 module.exports.getIndexOf = require('./getIndexOf')
 module.exports.getIndexVersion = require('./getIndexVersion')
