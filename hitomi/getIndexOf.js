@@ -13,7 +13,6 @@ const decoders = {
 
 module.exports = async (opts = {}, fetchAgent) => {
   const {
-    url,
     key,
     value,
     skip = 1,
@@ -21,7 +20,7 @@ module.exports = async (opts = {}, fetchAgent) => {
     decoder = 'nozomi'
   } = opts
 
-  if (!opts.key || !opts.value) return [] // NOTE: remove `!opts.key` when plain-text search implemented;
+  if (!key || !value) return [] // NOTE: remove `!opts.key` when plain-text search implemented;
 
   opts.key = opts.key.toLowerCase()
   opts.value = opts.value.toLowerCase()
@@ -51,9 +50,9 @@ module.exports = async (opts = {}, fetchAgent) => {
     debug('calculated bytes range:', headers.range)
   }
 
-  debug('requesting url:', url)
+  debug('requesting url:', opts.url)
 
-  const res = await fetch(url, {
+  const res = await fetch(opts.url, {
     headers,
     agent: fetchAgent
   })

@@ -1,7 +1,9 @@
 const getIndexOf = require('./getIndexOf')
+const getMetadata = require('./getMetadata')
 
 const mods = {
-  getIndexOf
+  getIndexOf,
+  getMetadata
 }
 
 const init = async () => {

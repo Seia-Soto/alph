@@ -1,19 +1,9 @@
 const { createLogger } = require('../utils')
 
-const debug = createLogger('hitomi/decodeIndex')
+const debug = createLogger('hitomi/decodeNozomi')
 
 module.exports = buffer => {
-  debug('resolving buffer:', buffer)
+  debug('unsupported feature, impl required: B_search')
 
-  const items = []
-  const set = new DataView(buffer)
-  const count = set.byteLength / 4
-
-  debug('got set of items:', count)
-
-  for (let i = 0; i < count; i++) {
-    items.push(set.getInt32(i * 4, false /* big endian */))
-  }
-
-  return items
+  return buffer
 }

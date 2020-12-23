@@ -1,8 +1,12 @@
 const fetch = require('node-fetch')
-const { getUserAgent } = require('../utils')
+const { createLogger, getUserAgent } = require('../utils')
+
+const debug = createLogger('hitomi/getIndexVersion')
 
 module.exports = async (type, fetchAgent) => {
   const version = Date.now()
+
+  debug('querying index version of:', type)
 
   const res = await fetch(`https://ltn.hitomi.la/${type}/version?_=${version}`, {
     headers: {
