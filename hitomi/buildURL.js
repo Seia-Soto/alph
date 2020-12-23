@@ -22,7 +22,7 @@ module.exports = async (opts = {}) => {
         break
       case 'female':
       case 'male':
-        url += `/tag/${value}-all`
+        url += `/tag/${key}-${value}-all`
         break
       default:
         url += `/${key}/${value}-all`
